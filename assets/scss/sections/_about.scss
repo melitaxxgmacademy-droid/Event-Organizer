@@ -1,0 +1,247 @@
+// main: ../main.scss
+/*--------------------------------------------------------------
+# About Section
+--------------------------------------------------------------*/
+.about {
+  .content {
+    h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .lead {
+      font-size: 1.1rem;
+      color: color-mix(in srgb, var(--default-color), transparent 20%);
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .quote-section {
+      background-color: var(--surface-color);
+      padding: 2rem;
+      border-radius: 10px;
+      border-left: 4px solid var(--accent-color);
+      margin: 2rem 0;
+
+      blockquote {
+        margin: 0;
+
+        p {
+          font-style: italic;
+          font-size: 1.1rem;
+          margin-bottom: 1rem;
+          color: var(--heading-color);
+        }
+
+        cite {
+          font-style: normal;
+          font-weight: 600;
+          color: var(--accent-color);
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+
+      .btn-primary,
+      .btn-secondary {
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        display: inline-block;
+      }
+
+      .btn-primary {
+        background-color: var(--accent-color);
+        color: var(--contrast-color);
+
+        &:hover {
+          background-color: color-mix(in srgb, var(--accent-color), black 15%);
+          transform: translateY(-2px);
+        }
+      }
+
+      .btn-secondary {
+        background-color: transparent;
+        color: var(--accent-color);
+        border-color: var(--accent-color);
+
+        &:hover {
+          background-color: var(--accent-color);
+          color: var(--contrast-color);
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+
+    .stat-card {
+      background-color: var(--surface-color);
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 5px 15px color-mix(in srgb, var(--default-color), transparent 90%);
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px color-mix(in srgb, var(--default-color), transparent 85%);
+      }
+
+      .stat-icon {
+        margin-bottom: 1rem;
+
+        i {
+          font-size: 2.5rem;
+          color: var(--accent-color);
+        }
+      }
+
+      .stat-content {
+        h4 {
+          font-size: 1.8rem;
+          font-weight: 700;
+          margin-bottom: 0.5rem;
+          color: var(--heading-color);
+        }
+
+        p {
+          color: color-mix(in srgb, var(--default-color), transparent 30%);
+          margin: 0;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+
+  .audience-section {
+    text-align: center;
+
+    h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: color-mix(in srgb, var(--default-color), transparent 20%);
+      font-size: 1.1rem;
+    }
+
+    .audience-item {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: var(--surface-color);
+        transform: translateY(-5px);
+
+        .audience-icon i {
+          color: var(--accent-color);
+          transform: scale(1.1);
+        }
+      }
+
+      .audience-icon {
+        margin-bottom: 1rem;
+
+        i {
+          font-size: 2rem;
+          color: var(--heading-color);
+          transition: all 0.3s ease;
+        }
+      }
+
+      h5 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--heading-color);
+      }
+
+      p {
+        font-size: 0.85rem;
+        color: color-mix(in srgb, var(--default-color), transparent 40%);
+        margin: 0;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    .content {
+      margin-bottom: 3rem;
+
+      .cta-buttons {
+        justify-content: center;
+      }
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .content {
+      h3 {
+        font-size: 1.8rem;
+      }
+
+      .quote-section {
+        padding: 1.5rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+
+        .btn-primary,
+        .btn-secondary {
+          width: 100%;
+          max-width: 250px;
+          text-align: center;
+        }
+      }
+    }
+
+    .audience-section {
+      .audience-item {
+        padding: 1rem 0.5rem;
+
+        .audience-icon i {
+          font-size: 1.8rem;
+        }
+
+        h5 {
+          font-size: 0.9rem;
+        }
+
+        p {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}

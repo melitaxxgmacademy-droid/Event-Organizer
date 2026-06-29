@@ -1,0 +1,287 @@
+// main: ../main.scss
+/*--------------------------------------------------------------
+# Tickets Section
+--------------------------------------------------------------*/
+.tickets {
+  .ticket-card {
+    background: var(--surface-color);
+    border-radius: 16px;
+    padding: 40px 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 2px solid transparent;
+    height: 100%;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    &.featured {
+      border-color: var(--accent-color);
+      transform: scale(1.05);
+      background: linear-gradient(135deg, var(--surface-color) 0%, color-mix(in srgb, var(--accent-color), transparent 95%) 100%);
+
+      &:hover {
+        transform: scale(1.05) translateY(-5px);
+      }
+    }
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-color);
+    color: var(--contrast-color);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .ticket-header {
+    text-align: center;
+    margin-bottom: 30px;
+
+    h3 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--heading-color);
+    }
+
+    .ticket-price {
+      margin-bottom: 10px;
+
+      .currency {
+        font-size: 20px;
+        color: var(--accent-color);
+        font-weight: 600;
+        vertical-align: top;
+      }
+
+      .amount {
+        font-size: 48px;
+        font-weight: 700;
+        color: var(--accent-color);
+        line-height: 1;
+      }
+
+      .period {
+        font-size: 16px;
+        color: color-mix(in srgb, var(--default-color), transparent 40%);
+        font-weight: 500;
+      }
+
+      .original-price {
+        font-size: 18px;
+        color: color-mix(in srgb, var(--default-color), transparent 50%);
+        text-decoration: line-through;
+        margin-right: 10px;
+      }
+    }
+
+    .ticket-duration {
+      color: color-mix(in srgb, var(--default-color), transparent 30%);
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0;
+    }
+  }
+
+  .ticket-body {
+    margin-bottom: 30px;
+
+    .ticket-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 15px;
+        font-size: 15px;
+        line-height: 1.5;
+        color: var(--default-color);
+
+        i {
+          color: var(--accent-color);
+          font-size: 18px;
+          margin-right: 12px;
+          margin-top: 2px;
+          flex-shrink: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .ticket-footer {
+    text-align: center;
+
+    .btn-ticket {
+      background: var(--accent-color);
+      color: var(--contrast-color);
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      border: 2px solid var(--accent-color);
+      width: 100%;
+      margin-bottom: 15px;
+
+      &:hover {
+        background: var(--contrast-color);
+        color: var(--accent-color);
+        transform: translateY(-2px);
+      }
+    }
+
+    .availability-info {
+      margin: 0;
+      font-size: 14px;
+      color: color-mix(in srgb, var(--default-color), transparent 40%);
+      font-weight: 500;
+    }
+  }
+
+  .ticket-info-bar {
+    background: color-mix(in srgb, var(--accent-color), transparent 95%);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    border: 1px solid color-mix(in srgb, var(--accent-color), transparent 85%);
+
+    .countdown-info {
+      margin-bottom: 30px;
+
+      h4 {
+        color: var(--heading-color);
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 20px;
+
+        i {
+          color: var(--accent-color);
+          margin-right: 10px;
+        }
+      }
+
+      .countdown {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+
+        >div {
+          background: var(--surface-color);
+          padding: 20px 15px;
+          border-radius: 10px;
+          min-width: 80px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+          h3 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 0 0 5px 0;
+            line-height: 1;
+          }
+
+          h4 {
+            font-size: 14px;
+            font-weight: 500;
+            color: color-mix(in srgb, var(--default-color), transparent 30%);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          }
+        }
+      }
+    }
+
+    .support-info {
+      p {
+        margin-bottom: 10px;
+        font-size: 16px;
+        color: var(--default-color);
+      }
+
+      .contact-link {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 600;
+
+        &:hover {
+          color: color-mix(in srgb, var(--accent-color), transparent 25%);
+        }
+      }
+
+      .divider {
+        margin: 0 15px;
+        color: color-mix(in srgb, var(--default-color), transparent 50%);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .ticket-card {
+      padding: 30px 20px;
+
+      &.featured {
+        transform: none;
+
+        &:hover {
+          transform: translateY(-5px);
+        }
+      }
+    }
+
+    .ticket-header {
+      .ticket-price {
+        .amount {
+          font-size: 36px;
+        }
+      }
+    }
+
+    .ticket-info-bar {
+      padding: 30px 20px;
+
+      .countdown {
+        gap: 15px !important;
+
+        >div {
+          padding: 15px 10px;
+          min-width: 60px;
+
+          h3 {
+            font-size: 24px;
+          }
+
+          h4 {
+            font-size: 12px;
+          }
+        }
+      }
+
+      .support-info {
+        .divider {
+          display: block;
+          margin: 10px 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,446 @@
+// main: ../main.scss
+/*--------------------------------------------------------------
+# Speaker Details 2 Section
+--------------------------------------------------------------*/
+.speaker-details-2 {
+  .speaker-profile-card {
+    background: var(--surface-color);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px color-mix(in srgb, var(--default-color), transparent 90%);
+    margin-bottom: 2rem;
+
+    .profile-image-wrapper {
+      position: relative;
+
+      img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+
+        @media (max-width: 768px) {
+          height: 280px;
+        }
+      }
+
+      .speaker-status {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+
+        .status-badge {
+          background: var(--accent-color);
+          color: var(--contrast-color);
+          padding: 0.5rem 1rem;
+          border-radius: 20px;
+          font-size: 0.85rem;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+
+          &.keynote {
+            background: linear-gradient(135deg, var(--accent-color), color-mix(in srgb, var(--accent-color), #ff6b6b 30%));
+          }
+        }
+      }
+    }
+
+    .profile-content {
+      padding: 2rem;
+
+      .speaker-name {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+        color: var(--heading-color);
+      }
+
+      .speaker-title {
+        color: var(--accent-color);
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-bottom: 0.75rem;
+      }
+
+      .speaker-company {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: color-mix(in srgb, var(--default-color), transparent 30%);
+        margin-bottom: 2rem;
+        font-size: 1rem;
+
+        i {
+          color: var(--accent-color);
+        }
+      }
+
+      .connection-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: color-mix(in srgb, var(--accent-color), transparent 95%);
+        border-radius: 12px;
+
+        .stat-item {
+          text-align: center;
+
+          .stat-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            line-height: 1.2;
+          }
+
+          .stat-label {
+            font-size: 0.8rem;
+            color: color-mix(in srgb, var(--default-color), transparent 40%);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          }
+        }
+      }
+
+      .social-connections {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+
+        .social-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          padding: 0.75rem;
+          background: transparent;
+          border: 2px solid color-mix(in srgb, var(--default-color), transparent 85%);
+          border-radius: 10px;
+          color: var(--default-color);
+          text-decoration: none;
+          transition: all 0.3s ease;
+          font-weight: 500;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px color-mix(in srgb, var(--default-color), transparent 85%);
+          }
+
+          &.linkedin:hover {
+            border-color: #0077b5;
+            color: #0077b5;
+            background: color-mix(in srgb, #0077b5, transparent 95%);
+          }
+
+          &.twitter:hover {
+            border-color: #1da1f2;
+            color: #1da1f2;
+            background: color-mix(in srgb, #1da1f2, transparent 95%);
+          }
+
+          &.website:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            background: color-mix(in srgb, var(--accent-color), transparent 95%);
+          }
+        }
+      }
+    }
+  }
+
+  .speaker-highlight {
+    background: linear-gradient(135deg, var(--surface-color), color-mix(in srgb, var(--accent-color), transparent 97%));
+    border-radius: 15px;
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    border: 1px solid color-mix(in srgb, var(--accent-color), transparent 85%);
+
+    .quote-container {
+      position: relative;
+
+      .quote-icon {
+        position: absolute;
+        top: -15px;
+        left: -10px;
+        width: 50px;
+        height: 50px;
+        background: var(--accent-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+          font-size: 1.5rem;
+          color: var(--contrast-color);
+        }
+      }
+
+      blockquote {
+        font-size: 1.25rem;
+        font-style: italic;
+        line-height: 1.6;
+        color: var(--heading-color);
+        margin: 0;
+        padding-left: 3rem;
+
+        @media (max-width: 768px) {
+          font-size: 1.1rem;
+          padding-left: 2rem;
+        }
+      }
+    }
+  }
+
+  .speaker-biography,
+  .session-schedule {
+    margin-bottom: 2.5rem;
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+
+      h3 {
+        font-size: 1.6rem;
+        color: var(--heading-color);
+        margin: 0;
+        white-space: nowrap;
+      }
+
+      .header-line {
+        flex: 1;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent-color), transparent);
+      }
+    }
+
+    .bio-content {
+      p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+        color: color-mix(in srgb, var(--default-color), transparent 10%);
+      }
+
+      .expertise-areas {
+        margin-top: 2rem;
+
+        h4 {
+          font-size: 1.2rem;
+          margin-bottom: 1rem;
+          color: var(--heading-color);
+        }
+
+        .tags-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+
+          .expertise-tag {
+            background: var(--accent-color);
+            color: var(--contrast-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+
+  .schedule-timeline {
+    position: relative;
+    padding-left: 2rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: color-mix(in srgb, var(--accent-color), transparent 70%);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &.featured {
+        .timeline-content {
+          background: color-mix(in srgb, var(--accent-color), transparent 95%);
+          border-left: 4px solid var(--accent-color);
+        }
+      }
+
+      .timeline-marker {
+        position: absolute;
+        left: -2rem;
+        top: 0.5rem;
+
+        .marker-dot {
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          margin-left: 8px;
+          border: 3px solid var(--surface-color);
+
+          &.keynote {
+            background: var(--accent-color);
+          }
+
+          &.workshop {
+            background: #10b981;
+          }
+
+          &.panel {
+            background: #8b5cf6;
+          }
+        }
+      }
+
+      .timeline-content {
+        background: var(--surface-color);
+        padding: 2rem;
+        border-radius: 12px;
+        border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+
+        .session-tag {
+          display: inline-block;
+          padding: 0.3rem 0.8rem;
+          border-radius: 15px;
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          margin-bottom: 1rem;
+
+          &.keynote {
+            background: var(--accent-color);
+            color: var(--contrast-color);
+          }
+
+          &.workshop {
+            background: #10b981;
+            color: white;
+          }
+
+          &.panel {
+            background: #8b5cf6;
+            color: white;
+          }
+        }
+
+        .session-name {
+          font-size: 1.3rem;
+          margin-bottom: 1.5rem;
+          color: var(--heading-color);
+        }
+
+        .session-meta-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 1rem;
+          margin-bottom: 1rem;
+
+          @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+          }
+
+          .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: color-mix(in srgb, var(--default-color), transparent 30%);
+            font-size: 0.95rem;
+
+            i {
+              color: var(--accent-color);
+              font-size: 1rem;
+            }
+          }
+        }
+
+        .session-summary {
+          line-height: 1.6;
+          margin: 0;
+          color: color-mix(in srgb, var(--default-color), transparent 20%);
+        }
+      }
+    }
+  }
+
+  .speaker-cta {
+    padding: 2rem 0;
+    border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      a {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.875rem 2rem;
+        border-radius: 25px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        justify-content: center;
+
+        &.btn-primary {
+          background: var(--accent-color);
+          color: var(--contrast-color);
+          border: 2px solid var(--accent-color);
+
+          &:hover {
+            background: transparent;
+            color: var(--accent-color);
+            transform: translateY(-2px);
+          }
+        }
+
+        &.btn-secondary {
+          background: var(--heading-color);
+          color: var(--background-color);
+          border: 2px solid var(--heading-color);
+
+          &:hover {
+            background: transparent;
+            color: var(--heading-color);
+            transform: translateY(-2px);
+          }
+        }
+
+        &.btn-outline {
+          background: transparent;
+          color: var(--default-color);
+          border: 2px solid color-mix(in srgb, var(--default-color), transparent 70%);
+
+          &:hover {
+            background: var(--default-color);
+            color: var(--background-color);
+            border-color: var(--default-color);
+            transform: translateY(-2px);
+          }
+        }
+      }
+    }
+  }
+}
