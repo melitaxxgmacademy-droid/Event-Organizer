@@ -889,6 +889,7 @@ section,
   }
 }
 
+/* --- TAMPILAN DESKTOP --- */
 .hero .countdown-label {
   font-size: 1.2rem;
   font-weight: 500;
@@ -897,22 +898,9 @@ section,
   text-transform: uppercase;
 }
 
-@media (max-width: 768px) {
-  .hero .countdown-label {
-    font-size: 1rem;
-    margin-bottom: 24px;
-  }
-}
-
 .hero .countdown {
   gap: 30px;
   margin-bottom: 0;
-}
-
-@media (max-width: 768px) {
-  .hero .countdown {
-    gap: 20px;
-  }
 }
 
 .hero .countdown div {
@@ -930,24 +918,11 @@ section,
   transform: translateY(-2px);
 }
 
-@media (max-width: 768px) {
-  .hero .countdown div {
-    padding: 16px 12px;
-    min-width: 90px;
-  }
-}
-
 .hero .countdown div h3 {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 8px;
   line-height: 1;
-}
-
-@media (max-width: 768px) {
-  .hero .countdown div h3 {
-    font-size: 2rem;
-  }
 }
 
 .hero .countdown div h4 {
@@ -959,9 +934,30 @@ section,
   letter-spacing: 1px;
 }
 
+/* --- TAMPILAN MOBILE --- */
 @media (max-width: 768px) {
+  .hero .countdown-label {
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+
+  .hero .countdown {
+    gap: 8px;
+    width: 100%;
+  }
+
+  .hero .countdown div {
+    padding: 12px 4px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .hero .countdown div h3 {
+    font-size: 1.4rem;
+  }
+
   .hero .countdown div h4 {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
   }
 }
 
