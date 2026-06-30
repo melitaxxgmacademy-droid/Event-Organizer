@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
   <meta charset="utf-8">
@@ -105,6 +105,7 @@
                 </div>
               </div>
 
+              <form id="ticketForm" class="ticket-form">
               <div class="ticket-types">
                 <h4>Select Ticket Type</h4>
 
@@ -183,8 +184,6 @@
                 </div>
               </div>
 
-<form id="ticketForm" class="php-email-form ticket-form">
-
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -218,86 +217,77 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="company">Company/Organization</label>
+                      <label for="company">Perusahaan/Organisasi</label>
                       <input type="text" name="company" id="company" class="form-control">
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="job_title">Job Title</label>
+                      <label for="job_title">Jabatan</label>
                       <input type="text" name="job_title" id="job_title" class="form-control">
                     </div>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="quantity">Number of Tiket</label>
+                  <label for="quantity">Jumlah Tiket</label>
                   <select name="quantity" id="quantity" class="form-control" required="">
-                    <option value="1">1 Ticket</option>
+                    <option value="1">1 Tiket</option>
                     <option value="2">2 Tiket</option>
                     <option value="3">3 Tiket</option>
                     <option value="4">4 Tiket</option>
                     <option value="5">5 Tiket</option>
-                    <option value="more">More than 5 (Kontak us)</option>
+                    <option value="more">Lebih dari 5 (Hubungi Kami)</option>
                   </select>
                 </div>
 
                 <div class="form-group">
-                  <label for="dietary">Dietary Restrictions (Optional)</label>
-                  <textarea name="dietary" id="dietary" rows="3" class="form-control" placeholder="Please specify any dietary restrictions or food allergies"></textarea>
+                  <label for="dietary">Pembatasan Makan (Opsional)</label>
+                  <textarea name="dietary" id="dietary" rows="3" class="form-control" placeholder="Sebutkan pembatasan makan atau alergi makanan jika ada"></textarea>
                 </div>
 
                 <div class="form-group">
-                  <label for="special_requests">Special Requests (Optional)</label>
-                  <textarea name="special_requests" id="special_requests" rows="3" class="form-control" placeholder="Any special accommodation requests or additional information"></textarea>
+                  <label for="special_requests">Permintaan Khusus (Opsional)</label>
+                  <textarea name="special_requests" id="special_requests" rows="3" class="form-control" placeholder="Ada permintaan akomodasi khusus atau informasi tambahan?"></textarea>
                 </div>
 
                 <div class="pricing-summary">
-                  <h5>Order Summary</h5>
+                  <h5>Ringkasan Pesanan</h5>
                   <div class="summary-row">
-                    <span>Selected Ticket:</span>
-                    <span class="ticket-name-display">Early Bird Pass</span>
+                    <span>Tiket yang Dipilih:</span>
+                    <span class="ticket-name-display">Paket Early Bird</span>
                   </div>
                   <div class="summary-row">
-                    <span>Quantity:</span>
+                    <span>Jumlah:</span>
                     <span class="quantity-display">1</span>
                   </div>
                   <div class="summary-row">
-                    <span>Unit Price:</span>
-                    <span class="unit-price-display">$199</span>
+                    <span>Harga Satuan:</span>
+                    <span class="unit-price-display">Rp199.000</span>
                   </div>
                   <div class="summary-row total">
-                    <span>Total Amount:</span>
-                    <span class="total-price">$199</span>
+                    <span>Total:</span>
+                    <span class="total-price">Rp199.000</span>
                   </div>
-                  <div class="tax-note">*All prices include applicable taxes and fees</div>
+                  <div class="tax-note">*Semua harga sudah termasuk pajak dan biaya yang berlaku</div>
                 </div>
 
                 <div class="terms-checkbox">
                   <input type="checkbox" id="terms" name="terms" required="">
-                  <label for="terms">I agree to the <a href="terms.html" target="_blank">Syarat and Conditions</a> and <a href="privacy.html" target="_blank">Privasi Policy</a> *</label>
+                  <label for="terms">Saya setuju dengan <a href="terms.html" target="_blank">Syarat & Ketentuan</a> dan <a href="privacy.html" target="_blank">Kebijakan Privasi</a> *</label>
                 </div>
-
-                <div class="newsletter-checkbox">
-                  <input type="checkbox" id="newsletter" name="newsletter">
-                  <label for="newsletter">Subscribe to our newsletter for event updates and future conferences</label>
-                </div>
-
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your ticket booking request has been submitted. You will receive a confirmation email shortly!</div>
 
                 <div class="form-submit">
                   <button type="submit" class="btn-submit">
                     <i class="bi bi-credit-card me-2"></i>
-                    Proceed to Payment
+                    Lanjutkan ke Pembayaran
                   </button>
                 </div>
 
               </form>
 
               <!-- Payment Modal -->
-              <div id="paymentModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+              <div id="paymentModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 9999; align-items: center; justify-content: center;">
                 <div style="background: white; padding: 40px; border-radius: 12px; max-width: 500px; width: 90%; color: #333;">
                   <h3 style="margin-top: 0; color: #f87500;">Pilih Metode Pembayaran</h3>
                   <p style="color: #666; margin-bottom: 30px;">Silahkan pilih metode pembayaran yang Anda inginkan:</p>
@@ -331,10 +321,10 @@
                 };
                 
                 const ticketNames = {
-                  'early-bird': 'Early Bird Pass',
-                  'standard': 'Standard Pass',
-                  'vip': 'VIP Pass',
-                  'student': 'Student Pass'
+                  'early-bird': 'Paket Early Bird',
+                  'standard': 'Paket Standar',
+                  'vip': 'Paket VIP',
+                  'student': 'Paket Mahasiswa'
                 };
 
                 // Store form data globally
@@ -345,36 +335,28 @@
                   
                   const form = this;
                   const submitBtn = form.querySelector('.btn-submit');
-                  const loading = form.querySelector('.loading');
-                  const errorMessage = form.querySelector('.error-message');
                   
                   // Validate form
                   if (!form.querySelector('#first_name').value.trim()) {
-                    errorMessage.textContent = 'Nama depan harus diisi!';
-                    errorMessage.style.display = 'block';
+                    alert('Nama depan harus diisi!');
                     return;
                   }
                   
                   if (!form.querySelector('#email').value.trim()) {
-                    errorMessage.textContent = 'Email harus diisi!';
-                    errorMessage.style.display = 'block';
+                    alert('Email harus diisi!');
                     return;
                   }
                   
                   if (!form.querySelector('input[name="ticket_type"]:checked')) {
-                    errorMessage.textContent = 'Pilih tipe tiket terlebih dahulu!';
-                    errorMessage.style.display = 'block';
+                    alert('Pilih tipe tiket terlebih dahulu!');
                     return;
                   }
                   
                   if (!form.querySelector('#terms').checked) {
-                    errorMessage.textContent = 'Setujui syarat dan ketentuan!';
-                    errorMessage.style.display = 'block';
+                    alert('Setujui syarat dan ketentuan!');
                     return;
                   }
                   
-                  errorMessage.style.display = 'none';
-                  loading.style.display = 'block';
                   submitBtn.disabled = true;
                   
                   // Collect form data
@@ -395,16 +377,13 @@
                     unitPrice: ticketPrices[ticketType],
                     totalPrice: totalPrice,
                     dietary: form.querySelector('#dietary').value,
-                    specialRequests: form.querySelector('#special_requests').value,
-                    newsletter: form.querySelector('#newsletter').checked
+                    specialRequests: form.querySelector('#special_requests').value
                   };
                   
-                  // Simulate loading
                   setTimeout(function() {
-                    loading.style.display = 'none';
                     submitBtn.disabled = false;
                     showPaymentModal();
-                  }, 1000);
+                  }, 300);
                 });
                 
                 // Payment Modal Functions
@@ -478,9 +457,8 @@
                   fullMessage += `%0A✅ Silakan konfirmasi pesanan saya dan tunggu informasi transfer/pembayaran lebih lanjut.`;
                   
                   // Open WhatsApp
-                  // Note: Replace '628XXXXXXXXX' with your WhatsApp business number
-                  const whatsappNumber = '628XXXXXXXXX'; // Change this to your WhatsApp number
-                  const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
+                  const whatsappNumber = '62895639068080';
+                  const whatsappURL = `https://wa.me/${whatsappNumber}?text=${fullMessage}`;
                   
                   // Show confirmation before opening WhatsApp
                   if (confirm('Anda akan diarahkan ke WhatsApp untuk menyelesaikan pemesanan. Lanjutkan?')) {
@@ -491,7 +469,6 @@
                 
                 function resetForm() {
                   document.getElementById('ticketForm').reset();
-                  document.querySelector('.sent-message').style.display = 'none';
                 }
                 
                 // Update pricing when ticket type changes
@@ -502,8 +479,8 @@
                     const quantity = parseInt(document.getElementById('quantity').value) || 1;
                     
                     document.querySelector('.ticket-name-display').textContent = name;
-                    document.querySelector('.unit-price-display').textContent = '$' + price;
-                    document.querySelector('.total-price').textContent = '$' + (price * quantity);
+                    document.querySelector('.unit-price-display').textContent = 'Rp' + price.toLocaleString('id-ID');
+                    document.querySelector('.total-price').textContent = 'Rp' + (price * quantity).toLocaleString('id-ID');
                   });
                 });
                 
@@ -514,7 +491,7 @@
                   const price = ticketPrices[selectedTicket];
                   
                   document.querySelector('.quantity-display').textContent = quantity;
-                  document.querySelector('.total-price').textContent = '$' + (price * quantity);
+                  document.querySelector('.total-price').textContent = 'Rp' + (price * quantity).toLocaleString('id-ID');
                 });
               </script>
 
@@ -522,19 +499,19 @@
                 <div class="security-badges">
                   <div class="badge-item">
                     <i class="bi bi-shield-check"></i>
-                    <span>Secure Payment</span>
+                    <span>Pembayaran Aman</span>
                   </div>
                   <div class="badge-item">
                     <i class="bi bi-lock"></i>
-                    <span>SSL Encrypted</span>
+                    <span>Terenkripsi SSL</span>
                   </div>
                   <div class="badge-item">
                     <i class="bi bi-arrow-clockwise"></i>
-                    <span>Full Refund Available</span>
+                    <span>Pengembalian Dana Penuh Tersedia</span>
                   </div>
                 </div>
                 <div class="payment-methods">
-                  <span class="payment-label">We Accept:</span>
+                  <span class="payment-label">Kami Menerima:</span>
                   <div class="payment-icons">
                     <i class="bi bi-credit-card"></i>
                     <i class="bi bi-paypal"></i>
@@ -619,7 +596,6 @@
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>

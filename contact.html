@@ -112,8 +112,7 @@
               </div>
               <div class="info-content">
                 <h4>Email</h4>
-                <p>info@example.com</p>
-                <p>contact@example.com</p>
+                <p>support@eventorganizer.co.id</p>
               </div>
             </div>
           </div>
@@ -146,7 +145,7 @@
             <div class="contact-form-wrapper">
               <h2 class="text-center mb-4">Hubungi Kami</h2>
 
-              <form id="contactForm" class="php-email-form">
+              <form id="contactForm" action="#">
                 <div class="row g-3">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -184,11 +183,7 @@
                     </div>
                   </div>
 
-                  <div class="col-12">
-                    <div class="loading">Memuat</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Pesan Anda telah terkirim. Terima kasih!</div>
-                  </div>
+                  
 
                   <div class="col-12 text-center">
                     <button type="submit" class="btn btn-primary btn-submit">KIRIM PESAN</button>
@@ -199,53 +194,32 @@
               <script>
                 document.getElementById('contactForm').addEventListener('submit', function(e) {
                   e.preventDefault();
-                  
+
                   const form = this;
-                  const loading = form.querySelector('.loading');
-                  const errorMessage = form.querySelector('.error-message');
-                  const sentMessage = form.querySelector('.sent-message');
                   const submitBtn = form.querySelector('.btn-submit');
-                  
-                  // Get form data
                   const name = form.querySelector('input[name="name"]').value.trim();
                   const email = form.querySelector('input[name="email"]').value.trim();
                   const subject = form.querySelector('input[name="subject"]').value.trim();
                   const message = form.querySelector('textarea[name="message"]').value.trim();
-                  
-                  // Validate
+
                   if (!name || !email || !subject || !message) {
-                    errorMessage.textContent = 'Mohon isi semua field yang diperlukan!';
-                    errorMessage.style.display = 'block';
+                    alert('Mohon isi semua field yang diperlukan!');
                     return;
                   }
-                  
-                  errorMessage.style.display = 'none';
-                  loading.style.display = 'block';
+
                   submitBtn.disabled = true;
-                  
-                  // Simulate loading
-                  setTimeout(function() {
-                    loading.style.display = 'none';
-                    sentMessage.style.display = 'block';
-                    submitBtn.disabled = false;
-                    
-                    // Build WhatsApp message
-                    const whatsappMessage = `Halo, nama saya ${name}%0A%0A` +
-                      `📧 Email: ${email}%0A` +
-                      `📝 Subjek: ${subject}%0A%0A` +
-                      `💬 Pesan:%0A${message}`;
-                    
-                    // Open WhatsApp
-                    const whatsappNumber = '628XXXXXXXXX'; // Ganti dengan nomor WhatsApp Anda
-                    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
-                    
-                    // Reset form after 2 seconds
-                    setTimeout(function() {
-                      window.open(whatsappURL, '_blank');
-                      form.reset();
-                      sentMessage.style.display = 'none';
-                    }, 1500);
-                  }, 1000);
+
+                  const whatsappMessage = `Halo, nama saya ${name}%0A%0A` +
+                    `📧 Email: ${email}%0A` +
+                    `📝 Subjek: ${subject}%0A%0A` +
+                    `💬 Pesan:%0A${message}`;
+
+                  const whatsappNumber = '62895639068080';
+                  const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
+                  window.open(whatsappURL, '_blank');
+                  form.reset();
+                  submitBtn.disabled = false;
                 });
               </script>
             </div>
@@ -324,7 +298,6 @@
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
