@@ -53,7 +53,6 @@
           <li><a href="blog.html">Blog</a></li>
           <li class="dropdown"><a href="#"><span>Halaman Lain</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="speaker-details.html">Detail Pembicara</a></li>
               <li><a href="tickets.html">Tiket</a></li>
               <li><a href="buy-tickets.html">Pesan Tiket</a></li>
               <li><a href="gallery.html">Galeri</a></li>
@@ -147,7 +146,7 @@
             <div class="contact-form-wrapper">
               <h2 class="text-center mb-4">Hubungi Kami</h2>
 
-              <form action="forms/contact.php" method="post" class="php-email-form">
+              <form id="contactForm" class="php-email-form">
                 <div class="row g-3">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -196,6 +195,59 @@
                   </div>
                 </div>
               </form>
+
+              <script>
+                document.getElementById('contactForm').addEventListener('submit', function(e) {
+                  e.preventDefault();
+                  
+                  const form = this;
+                  const loading = form.querySelector('.loading');
+                  const errorMessage = form.querySelector('.error-message');
+                  const sentMessage = form.querySelector('.sent-message');
+                  const submitBtn = form.querySelector('.btn-submit');
+                  
+                  // Get form data
+                  const name = form.querySelector('input[name="name"]').value.trim();
+                  const email = form.querySelector('input[name="email"]').value.trim();
+                  const subject = form.querySelector('input[name="subject"]').value.trim();
+                  const message = form.querySelector('textarea[name="message"]').value.trim();
+                  
+                  // Validate
+                  if (!name || !email || !subject || !message) {
+                    errorMessage.textContent = 'Mohon isi semua field yang diperlukan!';
+                    errorMessage.style.display = 'block';
+                    return;
+                  }
+                  
+                  errorMessage.style.display = 'none';
+                  loading.style.display = 'block';
+                  submitBtn.disabled = true;
+                  
+                  // Simulate loading
+                  setTimeout(function() {
+                    loading.style.display = 'none';
+                    sentMessage.style.display = 'block';
+                    submitBtn.disabled = false;
+                    
+                    // Build WhatsApp message
+                    const whatsappMessage = `Halo, nama saya ${name}%0A%0A` +
+                      `📧 Email: ${email}%0A` +
+                      `📝 Subjek: ${subject}%0A%0A` +
+                      `💬 Pesan:%0A${message}`;
+                    
+                    // Open WhatsApp
+                    const whatsappNumber = '628XXXXXXXXX'; // Ganti dengan nomor WhatsApp Anda
+                    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+                    
+                    // Reset form after 2 seconds
+                    setTimeout(function() {
+                      window.open(whatsappURL, '_blank');
+                      form.reset();
+                      sentMessage.style.display = 'none';
+                    }, 1500);
+                  }, 1000);
+                });
+              </script>
             </div>
           </div>
         </div>

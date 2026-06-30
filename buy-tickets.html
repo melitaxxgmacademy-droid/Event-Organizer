@@ -53,9 +53,7 @@
           <li><a href="blog.html">Blog</a></li>
           <li class="dropdown"><a href="#"><span>Halaman Lain</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="speaker-details.html">Detail Pembicara</a></li>
               <li><a href="tickets.html">Tiket</a></li>
-              <li><a href="buy-tickets.html" class="active">Pesan Tiket</a></li>
               <li><a href="gallery.html">Galeri</a></li>
               <li><a href="terms.html">Syarat</a></li>
               <li><a href="privacy.html">Privasi</a></li>
@@ -185,7 +183,7 @@
                 </div>
               </div>
 
-              <form action="forms/buy-tickets.php" method="post" class="php-email-form ticket-form">
+<form id="ticketForm" class="php-email-form ticket-form">
 
                 <div class="row">
                   <div class="col-md-6">
@@ -297,6 +295,228 @@
                 </div>
 
               </form>
+
+              <!-- Payment Modal -->
+              <div id="paymentModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+                <div style="background: white; padding: 40px; border-radius: 12px; max-width: 500px; width: 90%; color: #333;">
+                  <h3 style="margin-top: 0; color: #f87500;">Pilih Metode Pembayaran</h3>
+                  <p style="color: #666; margin-bottom: 30px;">Silahkan pilih metode pembayaran yang Anda inginkan:</p>
+                  
+                  <div id="paymentOptions" style="display: grid; gap: 15px; margin-bottom: 30px;">
+                    <button class="payment-option" data-method="Transfer Bank" style="padding: 15px; border: 2px solid #ddd; border-radius: 8px; background: white; cursor: pointer; text-align: left; transition: all 0.3s; font-weight: 500;">
+                      <i class="bi bi-bank"></i> Transfer Bank (BCA, Mandiri, BNI)
+                    </button>
+                    <button class="payment-option" data-method="E-Wallet" style="padding: 15px; border: 2px solid #ddd; border-radius: 8px; background: white; cursor: pointer; text-align: left; transition: all 0.3s; font-weight: 500;">
+                      <i class="bi bi-wallet2"></i> E-Wallet (GCash, Gopay, OVO, Dana)
+                    </button>
+                    <button class="payment-option" data-method="Credit Card" style="padding: 15px; border: 2px solid #ddd; border-radius: 8px; background: white; cursor: pointer; text-align: left; transition: all 0.3s; font-weight: 500;">
+                      <i class="bi bi-credit-card"></i> Credit Card / Debit Card
+                    </button>
+                    <button class="payment-option" data-method="Cash on Delivery" style="padding: 15px; border: 2px solid #ddd; border-radius: 8px; background: white; cursor: pointer; text-align: left; transition: all 0.3s; font-weight: 500;">
+                      <i class="bi bi-cash-coin"></i> Bayar Langsung/COD
+                    </button>
+                  </div>
+                  
+                  <button id="closeModal" style="width: 100%; padding: 12px; background: #e0e0e0; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; color: #333;">Batal</button>
+                </div>
+              </div>
+
+              <script>
+                // Ticket prices
+                const ticketPrices = {
+                  'early-bird': 199,
+                  'standard': 249,
+                  'vip': 399,
+                  'student': 99
+                };
+                
+                const ticketNames = {
+                  'early-bird': 'Early Bird Pass',
+                  'standard': 'Standard Pass',
+                  'vip': 'VIP Pass',
+                  'student': 'Student Pass'
+                };
+
+                // Store form data globally
+                let currentFormData = {};
+                
+                document.getElementById('ticketForm').addEventListener('submit', function(e) {
+                  e.preventDefault();
+                  
+                  const form = this;
+                  const submitBtn = form.querySelector('.btn-submit');
+                  const loading = form.querySelector('.loading');
+                  const errorMessage = form.querySelector('.error-message');
+                  
+                  // Validate form
+                  if (!form.querySelector('#first_name').value.trim()) {
+                    errorMessage.textContent = 'Nama depan harus diisi!';
+                    errorMessage.style.display = 'block';
+                    return;
+                  }
+                  
+                  if (!form.querySelector('#email').value.trim()) {
+                    errorMessage.textContent = 'Email harus diisi!';
+                    errorMessage.style.display = 'block';
+                    return;
+                  }
+                  
+                  if (!form.querySelector('input[name="ticket_type"]:checked')) {
+                    errorMessage.textContent = 'Pilih tipe tiket terlebih dahulu!';
+                    errorMessage.style.display = 'block';
+                    return;
+                  }
+                  
+                  if (!form.querySelector('#terms').checked) {
+                    errorMessage.textContent = 'Setujui syarat dan ketentuan!';
+                    errorMessage.style.display = 'block';
+                    return;
+                  }
+                  
+                  errorMessage.style.display = 'none';
+                  loading.style.display = 'block';
+                  submitBtn.disabled = true;
+                  
+                  // Collect form data
+                  const ticketType = form.querySelector('input[name="ticket_type"]:checked').value;
+                  const quantity = parseInt(form.querySelector('#quantity').value) || 1;
+                  const totalPrice = ticketPrices[ticketType] * quantity;
+                  
+                  currentFormData = {
+                    firstName: form.querySelector('#first_name').value,
+                    lastName: form.querySelector('#last_name').value,
+                    email: form.querySelector('#email').value,
+                    phone: form.querySelector('#phone').value,
+                    company: form.querySelector('#company').value,
+                    jobTitle: form.querySelector('#job_title').value,
+                    ticketType: ticketNames[ticketType],
+                    ticketTypeCode: ticketType,
+                    quantity: quantity,
+                    unitPrice: ticketPrices[ticketType],
+                    totalPrice: totalPrice,
+                    dietary: form.querySelector('#dietary').value,
+                    specialRequests: form.querySelector('#special_requests').value,
+                    newsletter: form.querySelector('#newsletter').checked
+                  };
+                  
+                  // Simulate loading
+                  setTimeout(function() {
+                    loading.style.display = 'none';
+                    submitBtn.disabled = false;
+                    showPaymentModal();
+                  }, 1000);
+                });
+                
+                // Payment Modal Functions
+                function showPaymentModal() {
+                  const modal = document.getElementById('paymentModal');
+                  modal.style.display = 'flex';
+                }
+                
+                function hidePaymentModal() {
+                  const modal = document.getElementById('paymentModal');
+                  modal.style.display = 'none';
+                }
+                
+                // Close modal button
+                document.getElementById('closeModal').addEventListener('click', hidePaymentModal);
+                
+                // Payment option selection
+                document.querySelectorAll('.payment-option').forEach(btn => {
+                  btn.addEventListener('click', function() {
+                    const paymentMethod = this.getAttribute('data-method');
+                    generateWhatsAppMessage(paymentMethod);
+                    hidePaymentModal();
+                  });
+                  
+                  btn.addEventListener('mouseover', function() {
+                    this.style.borderColor = '#f87500';
+                    this.style.backgroundColor = '#fff8f3';
+                  });
+                  
+                  btn.addEventListener('mouseout', function() {
+                    this.style.borderColor = '#ddd';
+                    this.style.backgroundColor = 'white';
+                  });
+                });
+                
+                // Generate WhatsApp Message
+                function generateWhatsAppMessage(paymentMethod) {
+                  const data = currentFormData;
+                  
+                  const message = `Halo, saya ingin mengkonfirmasi pemesanan tiket event berikut:%0A%0A` +
+                    `📋 *DATA PEMESAN*%0A` +
+                    `Nama: ${data.firstName} ${data.lastName}%0A` +
+                    `Email: ${data.email}%0A` +
+                    `No. Telepon: ${data.phone || 'Tidak diisi'}%0A` +
+                    `Perusahaan: ${data.company || 'Tidak diisi'}%0A` +
+                    `Jabatan: ${data.jobTitle || 'Tidak diisi'}%0A%0A` +
+                    
+                    `🎫 *DETAIL TIKET*%0A` +
+                    `Tipe Tiket: ${data.ticketType}%0A` +
+                    `Jumlah: ${data.quantity} tiket%0A` +
+                    `Harga Satuan: $${data.unitPrice}%0A` +
+                    `Total Harga: $${data.totalPrice}%0A%0A` +
+                    
+                    `💳 *METODE PEMBAYARAN*%0A` +
+                    `Pilihan: ${paymentMethod}%0A%0A`;
+                  
+                  let fullMessage = message;
+                  
+                  if (data.dietary) {
+                    fullMessage += `🍽️ Pembatasan Diet: ${data.dietary}%0A`;
+                  }
+                  
+                  if (data.specialRequests) {
+                    fullMessage += `📝 Permintaan Khusus: ${data.specialRequests}%0A`;
+                  }
+                  
+                  if (data.newsletter) {
+                    fullMessage += `📬 Subscribe ke newsletter: Ya%0A`;
+                  }
+                  
+                  fullMessage += `%0A✅ Silakan konfirmasi pesanan saya dan tunggu informasi transfer/pembayaran lebih lanjut.`;
+                  
+                  // Open WhatsApp
+                  // Note: Replace '628XXXXXXXXX' with your WhatsApp business number
+                  const whatsappNumber = '628XXXXXXXXX'; // Change this to your WhatsApp number
+                  const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
+                  
+                  // Show confirmation before opening WhatsApp
+                  if (confirm('Anda akan diarahkan ke WhatsApp untuk menyelesaikan pemesanan. Lanjutkan?')) {
+                    window.open(whatsappURL, '_blank');
+                    resetForm();
+                  }
+                }
+                
+                function resetForm() {
+                  document.getElementById('ticketForm').reset();
+                  document.querySelector('.sent-message').style.display = 'none';
+                }
+                
+                // Update pricing when ticket type changes
+                document.querySelectorAll('input[name="ticket_type"]').forEach(function(input) {
+                  input.addEventListener('change', function() {
+                    const price = ticketPrices[this.value];
+                    const name = ticketNames[this.value];
+                    const quantity = parseInt(document.getElementById('quantity').value) || 1;
+                    
+                    document.querySelector('.ticket-name-display').textContent = name;
+                    document.querySelector('.unit-price-display').textContent = '$' + price;
+                    document.querySelector('.total-price').textContent = '$' + (price * quantity);
+                  });
+                });
+                
+                // Update total when quantity changes
+                document.getElementById('quantity').addEventListener('change', function() {
+                  const quantity = parseInt(this.value) || 1;
+                  const selectedTicket = document.querySelector('input[name="ticket_type"]:checked').value;
+                  const price = ticketPrices[selectedTicket];
+                  
+                  document.querySelector('.quantity-display').textContent = quantity;
+                  document.querySelector('.total-price').textContent = '$' + (price * quantity);
+                });
+              </script>
 
               <div class="security-info">
                 <div class="security-badges">
