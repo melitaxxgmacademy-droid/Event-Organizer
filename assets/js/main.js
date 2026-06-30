@@ -92,6 +92,27 @@
   document.addEventListener('scroll', toggleScrollTop);
 
   /**
+   * Floating WhatsApp button
+   */
+  function initFloatingWhatsapp() {
+    const whatsappNumber = '62895639068080';
+    const whatsappURL = `https://wa.me/${whatsappNumber}`;
+
+    if (!document.querySelector('.whatsapp-float')) {
+      const whatsappBtn = document.createElement('a');
+      whatsappBtn.href = whatsappURL;
+      whatsappBtn.target = '_blank';
+      whatsappBtn.rel = 'noopener noreferrer';
+      whatsappBtn.className = 'whatsapp-float';
+      whatsappBtn.setAttribute('aria-label', 'Chat WhatsApp');
+      whatsappBtn.innerHTML = '<i class="bi bi-whatsapp"></i>';
+      document.body.appendChild(whatsappBtn);
+    }
+  }
+
+  window.addEventListener('load', initFloatingWhatsapp);
+
+  /**
    * Countdown timer
    */
   function updateCountDown(countDownItem) {
