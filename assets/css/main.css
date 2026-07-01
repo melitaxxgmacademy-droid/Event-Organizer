@@ -3434,11 +3434,13 @@ section,
 
 .glightbox-clean .gslide-description {
   background: #272727;
+  display: none !important;
 }
 
 .glightbox-clean .gslide-title {
   color: rgba(255, 255, 255, 0.8);
   margin: 0;
+  display: none !important;
 }
 
 /*--------------------------------------------------------------
