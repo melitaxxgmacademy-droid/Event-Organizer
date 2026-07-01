@@ -3,7 +3,20 @@
 # Tickets Section
 --------------------------------------------------------------*/
 .tickets {
+  .row.gy-4 {
+    align-items: stretch;
+  }
+
+  .row.gy-4 > [class*="col-"] {
+    display: flex;
+    min-height: 1px;
+  }
+
   .ticket-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 100%;
     background: var(--surface-color);
     border-radius: 16px;
     padding: 40px 30px;
@@ -20,11 +33,11 @@
 
     &.featured {
       border-color: var(--accent-color);
-      transform: scale(1.05);
+      transform: none;
       background: linear-gradient(135deg, var(--surface-color) 0%, color-mix(in srgb, var(--accent-color), transparent 95%) 100%);
 
       &:hover {
-        transform: scale(1.05) translateY(-5px);
+        transform: translateY(-5px);
       }
     }
   }
@@ -96,6 +109,7 @@
 
   .ticket-body {
     margin-bottom: 30px;
+    flex: 1;
 
     .ticket-features {
       list-style: none;
@@ -127,6 +141,7 @@
 
   .ticket-footer {
     text-align: center;
+    margin-top: auto;
 
     .btn-ticket {
       background: var(--accent-color);
@@ -136,10 +151,13 @@
       font-weight: 600;
       font-size: 16px;
       text-decoration: none;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       transition: all 0.3s ease;
       border: 2px solid var(--accent-color);
       width: 100%;
+      min-height: 56px;
       margin-bottom: 15px;
 
       &:hover {
