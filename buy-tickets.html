@@ -279,37 +279,12 @@
 
                 <div class="form-submit">
                   <button type="submit" class="btn-submit">
-                    <i class="bi bi-credit-card me-2"></i>
-                    Lanjutkan ke Pembayaran
+                    <i class="bi bi-whatsapp me-2"></i>
+                    Pesan Sekarang
                   </button>
                 </div>
 
               </form>
-
-              <!-- Payment Modal -->
-              <div id="paymentModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 9999; align-items: center; justify-content: center;">
-                <div style="background: white; padding: 40px; border-radius: 12px; max-width: 500px; width: 90%; color: #333;">
-                  <h3 style="margin-top: 0; color: #f87500;">Pilih Metode Pembayaran</h3>
-                  <p style="color: #666; margin-bottom: 30px;">Silahkan pilih metode pembayaran yang Anda inginkan:</p>
-                  
-                  <div id="paymentOptions" style="display: grid; gap: 15px; margin-bottom: 30px;">
-                    <button class="payment-option" data-method="Transfer Bank" style="padding: 15px; border: 2px solid #ddd; border-radius: 8px; background: white; cursor: pointer; text-align: left; transition: all 0.3s; font-weight: 500;">
-                      <i class="bi bi-bank"></i> Transfer Bank (BCA, Mandiri, BNI)
-                    </button>
-                    <button class="payment-option" data-method="E-Wallet" style="padding: 15px; border: 2px solid #ddd; border-radius: 8px; background: white; cursor: pointer; text-align: left; transition: all 0.3s; font-weight: 500;">
-                      <i class="bi bi-wallet2"></i> E-Wallet (GCash, Gopay, OVO, Dana)
-                    </button>
-                    <button class="payment-option" data-method="Credit Card" style="padding: 15px; border: 2px solid #ddd; border-radius: 8px; background: white; cursor: pointer; text-align: left; transition: all 0.3s; font-weight: 500;">
-                      <i class="bi bi-credit-card"></i> Credit Card / Debit Card
-                    </button>
-                    <button class="payment-option" data-method="Cash on Delivery" style="padding: 15px; border: 2px solid #ddd; border-radius: 8px; background: white; cursor: pointer; text-align: left; transition: all 0.3s; font-weight: 500;">
-                      <i class="bi bi-cash-coin"></i> Bayar Langsung/COD
-                    </button>
-                  </div>
-                  
-                  <button id="closeModal" style="width: 100%; padding: 12px; background: #e0e0e0; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; color: #333;">Batal</button>
-                </div>
-              </div>
 
               <script>
                 // Ticket prices
@@ -382,63 +357,26 @@
                   
                   setTimeout(function() {
                     submitBtn.disabled = false;
-                    showPaymentModal();
+                    generateWhatsAppMessage();
                   }, 300);
                 });
                 
-                // Payment Modal Functions
-                function showPaymentModal() {
-                  const modal = document.getElementById('paymentModal');
-                  modal.style.display = 'flex';
-                }
-                
-                function hidePaymentModal() {
-                  const modal = document.getElementById('paymentModal');
-                  modal.style.display = 'none';
-                }
-                
-                // Close modal button
-                document.getElementById('closeModal').addEventListener('click', hidePaymentModal);
-                
-                // Payment option selection
-                document.querySelectorAll('.payment-option').forEach(btn => {
-                  btn.addEventListener('click', function() {
-                    const paymentMethod = this.getAttribute('data-method');
-                    generateWhatsAppMessage(paymentMethod);
-                    hidePaymentModal();
-                  });
-                  
-                  btn.addEventListener('mouseover', function() {
-                    this.style.borderColor = '#f87500';
-                    this.style.backgroundColor = '#fff8f3';
-                  });
-                  
-                  btn.addEventListener('mouseout', function() {
-                    this.style.borderColor = '#ddd';
-                    this.style.backgroundColor = 'white';
-                  });
-                });
-                
                 // Generate WhatsApp Message
-                function generateWhatsAppMessage(paymentMethod) {
+                function generateWhatsAppMessage() {
                   const data = currentFormData;
                   
-                  const message = `Halo, saya ingin mengkonfirmasi pemesanan tiket event berikut:%0A%0A` +
+                  const message = `Halo, saya ingin memesan tiket event berikut sekarang:%0A%0A` +
                     `📋 *DATA PEMESAN*%0A` +
                     `Nama: ${data.firstName} ${data.lastName}%0A` +
                     `Email: ${data.email}%0A` +
                     `No. Telepon: ${data.phone || 'Tidak diisi'}%0A` +
                     `Perusahaan: ${data.company || 'Tidak diisi'}%0A` +
                     `Jabatan: ${data.jobTitle || 'Tidak diisi'}%0A%0A` +
-                    
                     `🎫 *DETAIL TIKET*%0A` +
                     `Tipe Tiket: ${data.ticketType}%0A` +
                     `Jumlah: ${data.quantity} tiket%0A` +
                     `Harga Satuan: Rp${data.unitPrice.toLocaleString('id-ID')}%0A` +
-                    `Total Harga: Rp${data.totalPrice.toLocaleString('id-ID')}%0A%0A` +
-                    
-                    `💳 *METODE PEMBAYARAN*%0A` +
-                    `Pilihan: ${paymentMethod}%0A%0A`;
+                    `Total Harga: Rp${data.totalPrice.toLocaleString('id-ID')}%0A%0A`;
                   
                   let fullMessage = message;
                   
@@ -450,17 +388,11 @@
                     fullMessage += `📝 Permintaan Khusus: ${data.specialRequests}%0A`;
                   }
                   
-                  if (data.newsletter) {
-                    fullMessage += `📬 Subscribe ke newsletter: Ya%0A`;
-                  }
-                  
                   fullMessage += `%0A✅ Silakan konfirmasi pesanan saya dan tunggu informasi transfer/pembayaran lebih lanjut.`;
                   
-                  // Open WhatsApp
                   const whatsappNumber = '62895639068080';
                   const whatsappURL = `https://wa.me/${whatsappNumber}?text=${fullMessage}`;
                   
-                  // Show confirmation before opening WhatsApp
                   if (confirm('Anda akan diarahkan ke WhatsApp untuk menyelesaikan pemesanan. Lanjutkan?')) {
                     window.open(whatsappURL, '_blank');
                     resetForm();
@@ -470,19 +402,6 @@
                 function resetForm() {
                   document.getElementById('ticketForm').reset();
                 }
-                
-                // Update pricing when ticket type changes
-                document.querySelectorAll('input[name="ticket_type"]').forEach(function(input) {
-                  input.addEventListener('change', function() {
-                    const price = ticketPrices[this.value];
-                    const name = ticketNames[this.value];
-                    const quantity = parseInt(document.getElementById('quantity').value) || 1;
-                    
-                    document.querySelector('.ticket-name-display').textContent = name;
-                    document.querySelector('.unit-price-display').textContent = 'Rp' + price.toLocaleString('id-ID');
-                    document.querySelector('.total-price').textContent = 'Rp' + (price * quantity).toLocaleString('id-ID');
-                  });
-                });
                 
                 // Update total when quantity changes
                 document.getElementById('quantity').addEventListener('change', function() {
