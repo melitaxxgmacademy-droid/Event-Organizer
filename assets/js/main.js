@@ -204,3 +204,46 @@
   });
 
 })();
+
+/*
+ * Ensure header and footer HTML are consistent across pages by loading
+ * the header/footer from index.html and replacing current ones.
+ * Runs only on non-index pages so editing a single file keeps layout in sync.
+ */
+if (window.location.pathname && !window.location.pathname.endsWith('index.html') && window.location.pathname !== '/' ) {
+  fetch('index.html')
+    .then(res => res.text())
+    .then(html => {
+      try {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const newHeader = doc.querySelector('#header');
+        const newFooter = doc.querySelector('#footer');
+
+        if (newHeader) {
+          const currentHeader = document.querySelector('#header');
+          if (currentHeader) currentHeader.replaceWith(newHeader.cloneNode(true));
+        }
+
+        if (newFooter) {
+          const currentFooter = document.querySelector('#footer');
+          if (currentFooter) currentFooter.replaceWith(newFooter.cloneNode(true));
+        }
+
+        // Update active nav link based on current pathname
+        const navLinks = document.querySelectorAll('#navmenu a');
+        navLinks.forEach(a => a.classList.remove('active'));
+        const path = window.location.pathname.split('/').pop();
+        let matched = Array.from(navLinks).find(a => a.getAttribute('href') === path);
+        if (!matched) {
+          // fallback for root
+          matched = Array.from(navLinks).find(a => a.getAttribute('href') === 'index.html');
+        }
+        if (matched) matched.classList.add('active');
+      } catch (e) {
+        // silent fail
+        console.warn('Header/footer sync failed:', e);
+      }
+    })
+    .catch(() => {});
+}

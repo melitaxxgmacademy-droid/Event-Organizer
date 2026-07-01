@@ -1863,11 +1863,16 @@ section,
 
   .intro .cta-section {
     justify-content: center;
+    gap: 0.75rem;
   }
 
   .intro .cta-section .btn {
-    flex: 1;
+    flex: 1 1 auto;
     text-align: center;
+    padding: 0.85rem 1.4rem;
+    font-size: 0.9rem;
+    min-width: 120px;
+    max-width: 220px;
   }
 }
 
@@ -2960,6 +2965,8 @@ section,
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
+/* Reverted mobile CTA size overrides per user request. Mobile buttons use original bootstrap sizing and the call-to-action defaults above. */
+
 .call-to-action .security-note {
   border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
   padding-top: 1rem;
@@ -3024,7 +3031,19 @@ section,
   height: auto !important;
 }
 
+.testimonials .testimonial-slider .swiper-slide {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
+
 .testimonials .testimonial-item {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 420px;
+  max-height: 440px;
   background: linear-gradient(135deg, var(--surface-color) 0%, color-mix(in srgb, var(--surface-color), var(--accent-color) 2%) 100%);
   border-radius: 20px;
   padding: 0;
@@ -3095,17 +3114,27 @@ section,
 }
 
 .testimonials .testimonial-body {
-  padding: 0 30px 20px;
+  padding: 0 25px 16px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .testimonials .testimonial-body p {
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.6;
   color: color-mix(in srgb, var(--default-color), transparent 20%);
   margin: 0;
   font-style: italic;
   text-align: center;
   position: relative;
+  max-height: 92px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 
 .testimonials .testimonial-body p::before,
@@ -3129,32 +3158,53 @@ section,
 }
 
 .testimonials .testimonial-footer {
-  padding: 20px 30px 30px;
+  padding: 16px 24px 18px;
   text-align: center;
   position: relative;
+  min-height: 72px;
 }
 
 .testimonials .testimonial-footer h5 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--heading-color);
-  margin: 0 0 5px;
+  margin: 0 0 4px;
 }
 
 .testimonials .testimonial-footer span {
   font-size: 0.85rem;
   color: color-mix(in srgb, var(--default-color), transparent 40%);
   display: block;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .testimonials .testimonial-footer .quote-icon {
   position: absolute;
-  bottom: 15px;
-  right: 25px;
+  bottom: 12px;
+  right: 22px;
   color: color-mix(in srgb, var(--accent-color), transparent 60%);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   transition: all 0.3s ease;
+}
+
+.testimonials .testimonial-item {
+  min-height: 430px;
+  max-height: 430px;
+  height: 430px;
+}
+
+.testimonials .testimonial-header {
+  padding: 24px 24px 16px;
+}
+
+.testimonials .testimonial-body {
+  padding: 0 24px 12px;
+}
+
+.testimonials .testimonial-body p {
+  max-height: 80px;
+  -webkit-line-clamp: 3;
+  font-size: 0.94rem;
 }
 
 .testimonials .swiper-navigation {
@@ -4330,7 +4380,20 @@ section,
 /*--------------------------------------------------------------
 # Tickets Section
 --------------------------------------------------------------*/
+.tickets .row.gy-4 {
+  align-items: stretch;
+}
+
+.tickets .row.gy-4 > [class*="col-"] {
+  display: flex;
+  min-height: 1px;
+}
+
 .tickets .ticket-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100%;
   background: var(--surface-color);
   border-radius: 16px;
   padding: 40px 30px;
@@ -4348,12 +4411,12 @@ section,
 
 .tickets .ticket-card.featured {
   border-color: var(--accent-color);
-  transform: scale(1.05);
+  transform: none;
   background: linear-gradient(135deg, var(--surface-color) 0%, color-mix(in srgb, var(--accent-color), transparent 95%) 100%);
 }
 
 .tickets .ticket-card.featured:hover {
-  transform: scale(1.05) translateY(-5px);
+  transform: translateY(-5px);
 }
 
 .tickets .popular-badge {
@@ -4423,6 +4486,7 @@ section,
 
 .tickets .ticket-body {
   margin-bottom: 30px;
+  flex: 1;
 }
 
 .tickets .ticket-body .ticket-features {
@@ -4454,6 +4518,7 @@ section,
 
 .tickets .ticket-footer {
   text-align: center;
+  margin-top: auto;
 }
 
 .tickets .ticket-footer .btn-ticket {
@@ -4464,10 +4529,13 @@ section,
   font-weight: 600;
   font-size: 16px;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.3s ease;
   border: 2px solid var(--accent-color);
   width: 100%;
+  min-height: 56px;
   margin-bottom: 15px;
 }
 
