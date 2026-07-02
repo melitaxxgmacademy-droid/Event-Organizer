@@ -234,12 +234,30 @@ if (window.location.pathname && !window.location.pathname.endsWith('index.html')
         const navLinks = document.querySelectorAll('#navmenu a');
         navLinks.forEach(a => a.classList.remove('active'));
         const path = window.location.pathname.split('/').pop();
-        let matched = Array.from(navLinks).find(a => a.getAttribute('href') === path);
-        if (!matched) {
-          // fallback for root
+        let lookupPath = path;
+
+        if (!path || path === '/') {
+          lookupPath = 'index.html';
+        } else if (path.startsWith('speaker-') || path === 'speaker-details.html') {
+          lookupPath = 'speakers.html';
+        } else if (path.startsWith('blog-')) {
+          lookupPath = 'blog.html';
+        }
+
+        let matched = Array.from(navLinks).find(a => a.getAttribute('href') === lookupPath);
+        if (!matched && lookupPath !== 'index.html') {
           matched = Array.from(navLinks).find(a => a.getAttribute('href') === 'index.html');
         }
-        if (matched) matched.classList.add('active');
+
+        if (matched) {
+          matched.classList.add('active');
+
+          const dropdownParent = matched.closest('.dropdown');
+          if (dropdownParent) {
+            const parentLink = dropdownParent.querySelector(':scope > a');
+            if (parentLink) parentLink.classList.add('active');
+          }
+        }
       } catch (e) {
         // silent fail
         console.warn('Header/footer sync failed:', e);

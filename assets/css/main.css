@@ -545,11 +545,38 @@ h6 {
 .footer .footer-links ul a {
   color: color-mix(in srgb, var(--default-color), transparent 30%);
   display: inline-block;
-  line-height: 1;
+  line-height: 1.5;
+  font-size: 14px;
 }
 
 .footer .footer-links ul a:hover {
   color: var(--accent-color);
+}
+
+.footer .footer-links ul li,
+.footer .footer-contact p,
+.footer .footer-about p {
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .footer {
+    font-size: 13px;
+  }
+
+  .footer h4 {
+    font-size: 15px;
+  }
+
+  .footer .footer-links ul a,
+  .footer .footer-contact p,
+  .footer .footer-about p {
+    font-size: 13px;
+  }
+
+  .footer .footer-about .logo span {
+    font-size: 22px;
+  }
 }
 
 .footer .footer-contact p {
